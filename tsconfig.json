@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "noImplicitAny": false,
+        "noEmitOnError": true,
+        "removeComments": true,
+        "sourceMap": true,
+        "target": "es6",
+        "module": "commonjs",
+        "lib": [
+            "es2016",
+            "dom"
+        ],
+        "strict": true,
+        "preserveConstEnums": true,
+        "allowJs": true,
+        "checkJs": true,
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}
