@@ -3,10 +3,7 @@ import type { TelegramData, TelegramEvent } from "./types";
 const BOT_ID: number = parseInt(process.env.BOT_ID || "0", 10);
 const IDENTIFIER: string = process.env.IDENTIFIER || "";
 
-window.removeEventListener("message", authTelegram);
-window.addEventListener("message", authTelegram);
-
-function authTelegram(event: TelegramEvent): void {
+const authTelegram = (event: TelegramEvent): void => {
   if (!event?.data) return;
 
   const { data } = event;
@@ -15,9 +12,9 @@ function authTelegram(event: TelegramEvent): void {
   if (data.msg === "auth_login_telegram") {
     telegram(data).catch(console.error);
   }
-}
+};
 
-function telegram(param: TelegramData): Promise<TelegramData> {
+const telegram = (param: TelegramData): Promise<TelegramData> => {
   return new Promise((resolve, reject) => {
     if (param.identifier !== IDENTIFIER) {
       return reject("Identifier does not match");
@@ -43,4 +40,7 @@ function telegram(param: TelegramData): Promise<TelegramData> {
       }
     );
   });
-}
+};
+
+window.removeEventListener("message", authTelegram);
+window.addEventListener("message", authTelegram);
