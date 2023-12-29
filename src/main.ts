@@ -1,19 +1,7 @@
-// import * as dotenv from "dotenv";
-// dotenv.config();
+import type { TelegramData, TelegramEvent } from "./types";
 
 const BOT_ID: number = parseInt(process.env.BOT_ID || "0", 10);
 const IDENTIFIER: string = process.env.IDENTIFIER || "";
-
-interface TelegramData {
-  identifier: string;
-  msg: string;
-  user?: any;
-  origin?: string;
-}
-
-interface TelegramEvent extends MessageEvent {
-  data: TelegramData;
-}
 
 window.removeEventListener("message", authTelegram);
 window.addEventListener("message", authTelegram);
@@ -40,7 +28,7 @@ function telegram(param: TelegramData): Promise<TelegramData> {
       (data) => {
         if (!data) {
           window.parent.postMessage(null, "*");
-          return reject("No data received");
+          return reject("Failed authentication");
         }
 
         const msgParam: TelegramData = {

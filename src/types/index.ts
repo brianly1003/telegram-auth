@@ -1,3 +1,14 @@
+export interface TelegramData {
+  identifier: string;
+  msg: string;
+  user?: any;
+  origin?: string;
+}
+
+export interface TelegramEvent extends MessageEvent {
+  data: TelegramData;
+}
+
 declare global {
   interface Window {
     Telegram: {
